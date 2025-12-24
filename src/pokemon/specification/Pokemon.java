@@ -13,6 +13,10 @@ public abstract class Pokemon {
     private int attackDamage;   // 공격력
     private int defense;         // 방어력
 
+    // 공유 카운트
+    private static int createdCount = 0;
+    private static int battleCount = 0;
+
     // 기본 생성자
     public Pokemon(String name, int hp, int attackDamage, int defense){
         this.name = name;
@@ -21,10 +25,16 @@ public abstract class Pokemon {
         this.pokemonMaxHp = hp;
         this.attackDamage = attackDamage;
         this.defense = defense;
+
+        // 포켓몬 생성 시 +1
+        createdCount++;
     }
 
     // getter와 setter 사용 후 필요 없는 거 지우기
     // getter(타입~변수, 읽기)
+    public static int getCreatedCount() {
+        return createdCount;
+    } // 포켓몬 생성
     public String getName(){return this.name;}              // 이름
     public int getHp(){return this.pokemonHp;}              // 체력
     public int getMaxHp(){return this.pokemonMaxHp;}
@@ -57,6 +67,7 @@ public abstract class Pokemon {
         }
         // 계산한 데미지 출력
         target.takeDamage(damage);
+        battleCount++;
     }
     // 데미지 계산 : takeDamage
     public void takeDamage(int damage){
@@ -65,14 +76,16 @@ public abstract class Pokemon {
 
         pokemonHp -= actualDamage;
 
-           if (pokemonHp <= 0) {
-               pokemonHp = 0;
-               System.out.println(name + " 이(가) 사망하였습니다!");
-           } else {
-               System.out.println(name + " " + actualDamage + " 피해!");
-               System.out.println("현재 체력: " + pokemonHp + "\n");
-           }
+        if (pokemonHp <= 0) {
+            pokemonHp = 0;
+            System.out.println(name + " 이(가) 사망하였습니다!");
+        } else {
+            System.out.println(name + " " + actualDamage + " 피해!");
+            System.out.println("현재 체력: " + pokemonHp + "\n");
         }
+        // 공격 시 카운트 증가
+        this.battleCount++;
+    }
     // 레밸업
     public final void levelUp() {
         if (this.level >= maxLevel) {
@@ -89,6 +102,10 @@ public abstract class Pokemon {
     public abstract void useE(Pokemon target);
     public abstract void useR(Pokemon target);
 
+    //생존 여부 체크
+    public boolean isAlive() {
+        return pokemonHp > 0;
+    }
 
 }
 

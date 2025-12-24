@@ -33,13 +33,13 @@ public class Pikachu extends Pokemon implements Static{
         applyStatic(target);
     }
     public void useE(Pokemon target) {
-        int damage = getAttackDamage() * 2;
+        int damage = getAttackDamage() + 20;
         System.out.println(getName() + " 아이언테일!");
         target.takeDamage(damage);
         applyStatic(target); // 접촉
     }
     public void useR(Pokemon target) {
-        int damage = getAttackDamage() * 3;
+        int damage = getAttackDamage() + 30;
         System.out.println(getName() + " ⚡ 10만 볼트!!!");
         target.takeDamage(damage);
         // 정전기 없음 (비접촉)

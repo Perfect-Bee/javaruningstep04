@@ -7,7 +7,7 @@ import pokemon.specification.Pokemon;
 public class Wartortle extends Pokemon implements Torrent {
     // 생성자
     public Wartortle(String name) {
-        super(name, 144, 48, 65);
+        super(name, 84, 48, 50);
     }
     
     // 꼬부기 특성 : 급류 = 체력 1/3이면 수속성 데미지 1.5배
